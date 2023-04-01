@@ -26,7 +26,7 @@ export default class Map {
 
     createRooms() {
         var quantityRooms = randomNumber(5, 11)
-        var quantityRooms = 2
+        console.log(quantityRooms)
         for (var i = 0; i < quantityRooms; i++) {
             var room = new Room(this.getMapSize())
             room.createRoom(this.MAP)
@@ -34,7 +34,10 @@ export default class Map {
     }
 
     createRoads() {
-        console.log('roads')
+        var quantityRoads = randomNumber(3, 6)
+        for (var i = 0; i < quantityRoads; i++) {
+            console.log('roads')
+        }
     }
 
     getMapSize() {
