@@ -1,5 +1,6 @@
 import Wall from './wall.js'
 import Room from './room.js'
+import Road from './road.js'
 import randomNumber from './services/random.js'
 
 export default class Map {
@@ -26,7 +27,6 @@ export default class Map {
 
     createRooms() {
         var quantityRooms = randomNumber(5, 11)
-        console.log(quantityRooms)
         for (var i = 0; i < quantityRooms; i++) {
             var room = new Room(this.getMapSize())
             room.createRoom(this.MAP)
@@ -36,7 +36,9 @@ export default class Map {
     createRoads() {
         var quantityRoads = randomNumber(3, 6)
         for (var i = 0; i < quantityRoads; i++) {
-            console.log('roads')
+            var road = new Road()
+            road.createRoad(this.getMapSize(), this.MAP, true)
+            road.createRoad(this.getMapSize(), this.MAP, false)
         }
     }
 
