@@ -4,6 +4,7 @@ export default class Room extends Rectangle {
     constructor(...args) {
         super(...args)
         this.activatorSizes = args[0]
+        this.stopCreate = false
     }
 
     createRoom(mapArray) {
@@ -12,7 +13,10 @@ export default class Room extends Rectangle {
             try {
                 this.createRoom(mapArray)
             } catch (e) {
-                console.log('Recursion: ', e)
+                console.log(
+                    `Комната со сторонами ${this.sideLengths.width} и ${this.sideLengths.height} не вместилась`
+                )
+                this.stopCreate = !this.stopCreate
             }
         }
         for (var blockY = 0; blockY < this.sideLengths.height; blockY++) {

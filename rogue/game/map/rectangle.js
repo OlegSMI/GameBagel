@@ -1,4 +1,4 @@
-import randomNumber from './services/random.js'
+import randomNumber from '../services/random.js'
 
 export default class Rectangle {
     constructor(mapSizes) {

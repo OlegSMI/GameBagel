@@ -1,7 +1,7 @@
 import Wall from './wall.js'
 import Room from './room.js'
 import Road from './road.js'
-import randomNumber from './services/random.js'
+import randomNumber from '../services/random.js'
 
 export default class Map {
     constructor() {
@@ -30,6 +30,9 @@ export default class Map {
         for (var i = 0; i < quantityRooms; i++) {
             var room = new Room(this.getMapSize())
             room.createRoom(this.MAP)
+            if (room.stopCreate) {
+                console.log('Требуется перерисовка')
+            }
         }
     }
 

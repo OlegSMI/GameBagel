@@ -1,8 +1,6 @@
-import Point from './point.js'
-
-export default class Wall extends Point {
-    constructor(...args) {
-        super(...args)
+export default class Wall {
+    constructor() {
+        this.parent = document.querySelector('.field')
         this.wall = document.createElement('div')
         this.wall.classList.add('tile')
     }
