@@ -5,16 +5,16 @@ import Enemy from './personages/enemy.js'
 class Game {
     constructor() {
         this.map = new Map()
-        this.hero = new Hero()
+        this.hero = new Hero(this.map.getMapSize(), this.map.MAP)
     }
 
     init() {
         this.map.createMap()
-        this.hero.createHero(this.map.getMapSize(), this.map.MAP)
-        this.hero.movementLeft(this.map.MAP)
+        this.hero.createHero()
+        this.hero.movementHero()
         for (var i = 0; i < 10; i++) {
-            var enemy = new Enemy()
-            enemy.createHero(this.map.getMapSize(), this.map.MAP)
+            var enemy = new Enemy(this.map.getMapSize(), this.map.MAP)
+            enemy.createHero()
         }
     }
 }

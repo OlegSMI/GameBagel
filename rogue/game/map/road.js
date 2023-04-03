@@ -37,13 +37,10 @@ export default class Road {
 
     createHorizontalRoad(mapSizes, mapArray) {
         this.createFirstPoint(mapSizes)
-        // if (this.placementRoadHorizontal(mapArray))
-        //     this.createHorizontalRoad(mapSizes, mapArray)
         for (var line = 0; line < mapSizes.width; line++) {
             mapArray[this.firstPoint.y][
                 this.firstPoint.x + line
             ].classList.remove('tileW')
-
             mapArray[this.firstPoint.y][this.firstPoint.x + line].classList.add(
                 'road'
             )
@@ -52,8 +49,6 @@ export default class Road {
 
     createVerticalRoad(mapSizes, mapArray) {
         this.createFirstPoint(mapSizes)
-        // if (this.placementRoadVertical(mapArray))
-        //     this.createVerticalRoad(mapSizes, mapArray)
         for (var line = 0; line < mapSizes.height; line++) {
             mapArray[this.firstPoint.y + line][
                 this.firstPoint.x
@@ -63,30 +58,4 @@ export default class Road {
             )
         }
     }
-
-    // placementRoadVertical(mapArray) {
-    //     for (var i = this.scope.fromX; i <= this.scope.toX; i++) {
-    //         if (!mapArray[this.firstPoint.y][i].classList.contains('road')) {
-    //             return false
-    //         }
-    //     }
-    //     return true
-    // }
-
-    // placementRoadHorizontal(mapArray) {
-    //     for (var i = this.scope.fromY; i <= this.scope.toY; i++) {
-    //         if (!mapArray[i][this.firstPoint.x].classList.contains('road')) {
-    //             return false
-    //         }
-    //     }
-    //     return true
-    // }
-
-    // createDecorator(f) {
-    //     console.log(arguments)
-    //     this.createFirstPoint(arguments)
-    //     return function () {
-    //         return f.apply(this, arguments)
-    //     }
-    // }
 }

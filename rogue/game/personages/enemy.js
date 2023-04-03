@@ -1,12 +1,12 @@
-import Point from './point.js'
+import Personage from './personage.js'
 
-export default class Hero extends Point {
+export default class Hero extends Personage {
     constructor(...args) {
         super(...args)
     }
 
-    createHero(mapSize, mapArray) {
-        this.create(mapSize, mapArray)
-        mapArray[this.y][this.x].classList.add('tileE')
+    createHero() {
+        this.createPersonage()
+        this.map.array[this.y][this.x].classList.add('tileE')
     }
 }

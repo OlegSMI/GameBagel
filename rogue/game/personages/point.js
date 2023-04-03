@@ -1,29 +1,26 @@
 import randomNumber from '../services/random.js'
 
 export default class Point {
-    constructor() {
+    constructor(sizeMap, mapArray) {
         this.x
         this.y
-    }
-
-    getCoords() {
-        return { x: this.x, y: this.y }
-    }
-
-    setCoords(_X, _Y) {
-        this.x = _X
-        this.y = _Y
-    }
-
-    create(mapSize, mapArray) {
-        this.x = randomNumber(0, mapSize.width)
-        this.y = randomNumber(0, mapSize.height)
-        if (this.checkWallBlock(mapArray)) {
-            this.create(mapSize, mapArray)
+        this.map = {
+            sizes: sizeMap,
+            array: mapArray,
         }
     }
 
-    checkWallBlock(mapArray) {
-        return mapArray[this.y][this.x].classList.contains('tileW')
+    create() {
+        this.x = randomNumber(0, this.map.sizes.width)
+        this.y = randomNumber(0, this.map.sizes.height)
+        if (this.checkWallBlock(this.x, this.y)) {
+            this.create()
+        }
     }
+
+    checkWallBlock(x, y) {
+        return this.map.array[y][x].classList.contains('tileW')
+    }
+
+    remove() {}
 }
