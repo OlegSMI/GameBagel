@@ -3,9 +3,8 @@ import Point from './point.js'
 export default class Personage extends Point {
     constructor(...args) {
         super(...args)
-        this.health
+        this.health = 5
         this.attack
-        this.personage
     }
 
     createPersonage() {
@@ -16,7 +15,7 @@ export default class Personage extends Point {
     createHealth() {
         var health = document.createElement('div')
         health.classList.add('health')
-        this.personage.appendChild(health)
+        this.map.array[this.y][this.x].appendChild(health)
     }
 
     movePersonage(diffX = 0, diffY = 0, className) {
@@ -27,7 +26,6 @@ export default class Personage extends Point {
 
     drawPersonage() {
         this.map.array[this.y][this.x].classList.add('personage')
-        this.personage = this.map.array[this.y][this.x]
         this.createHealth()
     }
 
@@ -38,16 +36,28 @@ export default class Personage extends Point {
             var child = arr.querySelector('.health')
             arr.removeChild(child)
         } catch (e) {
-            // var child = arr.querySelector('.health')
-            // arr.removeChild(child)
             console.log('Нельзя за пределы стены!')
         }
     }
 
-    killPersonage(arr, className) {
+    killPersonage(className) {
+        var arr = this.map.array[this.y][this.x]
         arr.classList.remove('personage')
         arr.classList.remove(className)
         var child = arr.querySelector('.health')
         arr.removeChild(child)
+    }
+
+    checkCoords(element) {
+        return (
+            (Math.abs(element.x - this.x) == 1 && element.y == this.y) ||
+            (Math.abs(element.y - this.y) == 1 && element.x == this.x)
+        )
+    }
+
+    reducedHealth(attack) {
+        this.health -= attack
+        this.map.array[this.y][this.x].querySelector('.health').style.width =
+            (this.health / 5) * 100 + '%'
     }
 }

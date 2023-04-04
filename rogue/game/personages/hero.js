@@ -3,7 +3,6 @@ import Personage from './personage.js'
 export default class Hero extends Personage {
     constructor(...args) {
         super(...args)
-        this.health = 5
         this.attack = 2
     }
 
@@ -55,10 +54,6 @@ export default class Hero extends Personage {
             this.moveHero(0, -1)
         }
         //attack
-        else if (e.keyCode == 32) {
-            e.preventDefault()
-            this.attackHero()
-        }
     }
 
     checkKey(key) {}
@@ -77,8 +72,24 @@ export default class Hero extends Personage {
 
     attackHero(enemy) {
         enemy.reducedHealth(this.attack)
-        if (enemy.health == 0) {
+        if (enemy.health <= 0) {
             enemy.killPersonage('tileE')
+        }
+    }
+
+    async fighting(enemys) {
+        let action = false
+        while (!action) {
+            await new Promise((resolve) => setTimeout(resolve, 100))
+            let e = await new Promise((resolve) => {
+                window.addEventListener('keydown', resolve)
+            })
+
+            if (e.keyCode == 32) {
+                e.preventDefault()
+                var enemysNear = enemys.filter((el) => this.checkCoords(el))
+                enemysNear.forEach((el) => this.attackHero(el))
+            }
         }
     }
 

@@ -8,15 +8,16 @@ class Game {
     constructor() {
         this.map = new Map()
         this.hero = new Hero(this.map.getMapSize(), this.map.MAP)
+        this.enemys = []
     }
 
     init() {
         this.map.createMap()
         this.hero.createHero()
-        this.hero.actionsHero()
         for (var i = 0; i < 10; i++) {
             var enemy = new Enemy(this.map.getMapSize(), this.map.MAP)
             enemy.createEnemy()
+            this.enemys.push(enemy)
             var sword = new Sword(this.map.getMapSize(), this.map.MAP)
             sword.createSword()
         }
@@ -24,6 +25,9 @@ class Game {
             var potion = new Potion(this.map.getMapSize(), this.map.MAP)
             potion.createPotion()
         }
+
+        this.hero.actionsHero()
+        this.hero.fighting(this.enemys)
     }
 }
 

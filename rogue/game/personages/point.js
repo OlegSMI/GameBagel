@@ -22,5 +22,22 @@ export default class Point {
         return this.map.array[y][x].classList.contains('tileW')
     }
 
-    remove() {}
+    removePoint(y, x) {
+        var node = this.map.array[y][x]
+        this.removeClasses(node.classList)
+        this.removeChildrens(node)
+    }
+
+    removeClasses(classList) {
+        while (classList.length > 0) {
+            classList.remove(classList.item(0))
+        }
+        classList.add('tile')
+    }
+
+    removeChildrens(myNode) {
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.lastChild)
+        }
+    }
 }
