@@ -12,5 +12,6 @@ export default class Potion extends Artifact {
 
     drawPotion() {
         this.map.array[this.y][this.x].classList.add('tileHP')
+        this.map.array[this.y][this.x].classList.add('potion')
     }
 }

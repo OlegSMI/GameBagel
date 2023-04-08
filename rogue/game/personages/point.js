@@ -13,7 +13,10 @@ export default class Point {
     create() {
         this.x = randomNumber(0, this.map.sizes.width)
         this.y = randomNumber(0, this.map.sizes.height)
-        if (this.checkWallBlock(this.x, this.y)) {
+        if (
+            this.checkWallBlock(this.x, this.y) ||
+            this.map.array[this.y][this.x].classList.length > 2
+        ) {
             this.create()
         }
     }

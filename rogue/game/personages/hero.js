@@ -36,27 +36,33 @@ export default class Hero extends Personage {
 
     handleKey(e) {
         //movement
-        if (e.key == 'd') {
+        if (e.keyCode == '68') {
             this.x += 1
-            if (this.x >= this.map.sizes.width) this.x -= 1
-            this.moveHero(-1, 0)
-        } else if (e.key == 'w') {
+            if (this.x >= this.map.sizes.width) {
+                this.x -= 1
+                this.moveHero(0, 0)
+            } else this.moveHero(-1, 0)
+        } else if (e.keyCode == '87') {
             this.y -= 1
-            if (this.y < 0) this.y += 1
-            this.moveHero(0, 1)
-        } else if (e.key == 'a') {
+            if (this.y < 0) {
+                this.y += 1
+                this.moveHero(0, 0)
+            } else this.moveHero(0, 1)
+        } else if (e.keyCode == '65') {
             this.x -= 1
-            if (this.x < 0) this.x += 1
-            this.moveHero(1, 0)
-        } else if (e.key == 's') {
+            if (this.x < 0) {
+                this.x += 1
+                this.moveHero(0, 0)
+            } else this.moveHero(1, 0)
+        } else if (e.keyCode == '83') {
             this.y += 1
-            if (this.y >= this.map.sizes.height) this.y -= 1
-            this.moveHero(0, -1)
+            if (this.y >= this.map.sizes.height) {
+                this.y -= 1
+                this.moveHero(0, 0)
+            } else this.moveHero(0, -1)
         }
         //attack
     }
-
-    checkKey(key) {}
 
     drawHero() {
         this.map.array[this.y][this.x].classList.add('tileP')
@@ -68,12 +74,18 @@ export default class Hero extends Personage {
 
     setHealth() {
         this.health = 5
+        this.createHealth()
     }
 
     attackHero(enemy) {
+        if (!this.map.array[enemy.y][enemy.x].classList.contains('tileE'))
+            return
         enemy.reducedHealth(this.attack)
+        console.log('fill', enemy)
         if (enemy.health <= 0) {
             enemy.killPersonage('tileE')
+            enemy = null
+            console.log('bill', enemy)
         }
     }
 

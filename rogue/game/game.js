@@ -14,20 +14,30 @@ class Game {
     init() {
         this.map.createMap()
         this.hero.createHero()
+
+        this.hero.actionsHero()
+        this.hero.fighting(this.enemys)
+
         for (var i = 0; i < 10; i++) {
             var enemy = new Enemy(this.map.getMapSize(), this.map.MAP)
+            enemy.fighting(this.hero)
             enemy.createEnemy()
             this.enemys.push(enemy)
             var sword = new Sword(this.map.getMapSize(), this.map.MAP)
             sword.createSword()
+            // enemy.moveEnemy()
         }
         for (var i = 0; i < 2; i++) {
             var potion = new Potion(this.map.getMapSize(), this.map.MAP)
             potion.createPotion()
         }
 
-        this.hero.actionsHero()
-        this.hero.fighting(this.enemys)
+        // while (true) {
+        //     new Promise((resolve) => setTimeout(resolve, 1000))
+        //     let e = new Promise((resolve) => {
+        //         console.log(this.enemys.length)
+        //     })
+        // }
     }
 }
 

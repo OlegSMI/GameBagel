@@ -16,12 +16,16 @@ export default class Personage extends Point {
         var health = document.createElement('div')
         health.classList.add('health')
         this.map.array[this.y][this.x].appendChild(health)
+        this.map.array[this.y][this.x].querySelector('.health').style.width =
+            (this.health / 5) * 100 + '%'
     }
 
     movePersonage(diffX = 0, diffY = 0, className) {
         var arr = this.map.array[this.y + diffY][this.x + diffX]
         this.drawPersonage()
-        this.redrawPersonage(arr, className)
+        if ((diffX != diffY) != 0) {
+            this.redrawPersonage(arr, className)
+        }
     }
 
     drawPersonage() {
@@ -30,14 +34,8 @@ export default class Personage extends Point {
     }
 
     redrawPersonage(arr, className) {
-        try {
-            arr.classList.remove('personage')
-            arr.classList.remove(className)
-            var child = arr.querySelector('.health')
-            arr.removeChild(child)
-        } catch (e) {
-            console.log('Нельзя за пределы стены!')
-        }
+        this.removeClasses(arr.classList)
+        this.removeChildrens(arr)
     }
 
     killPersonage(className) {

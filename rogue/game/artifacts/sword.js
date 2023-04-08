@@ -12,5 +12,6 @@ export default class Sword extends Artifact {
 
     drawSword() {
         this.map.array[this.y][this.x].classList.add('tileSW')
+        this.map.array[this.y][this.x].classList.add('sword')
     }
 }
