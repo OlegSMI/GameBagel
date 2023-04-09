@@ -28,12 +28,22 @@ export default class Personage extends Point {
         }
     }
 
+    move2Personage(X, Y, className) {
+        // console.log(X, Y)
+        var arr = this.map.array[Y][X]
+        console.log(arr)
+        this.drawPersonage()
+        // if ((X != Y) != 0) {
+        //     this.redraw2Personage(arr, className)
+        // }
+    }
+
     drawPersonage() {
         this.map.array[this.y][this.x].classList.add('personage')
         this.createHealth()
     }
 
-    redrawPersonage(arr, className) {
+    redrawPersonage(arr) {
         this.removeClasses(arr.classList)
         this.removeChildrens(arr)
     }

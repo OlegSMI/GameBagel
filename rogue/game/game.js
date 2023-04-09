@@ -17,7 +17,7 @@ class Game {
 
         this.hero.fighting(this.enemys)
 
-        for (var i = 0; i < 1; i++) {
+        for (var i = 0; i < 10; i++) {
             var enemy = new Enemy(
                 this.hero,
                 this.map.getMapSize(),

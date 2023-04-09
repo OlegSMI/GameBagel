@@ -4,7 +4,7 @@ import createPathToHero from '../services/finderPath.js'
 export default class Enemy extends Personage {
     constructor(hero, ...args) {
         super(...args)
-        this.attack = 1
+        this.attack = 0
         this.target = hero
         this.path = []
     }
@@ -22,78 +22,21 @@ export default class Enemy extends Personage {
     moveEnemy() {
         if (this.action) return
         console.log(this.path)
-        // var x = this.target.x
-        // var y = this.target.y
-        // // var { diffX, diffY } = this.moveToHero(x, y)
-        // this.movePersonage(diffX, diffY, 'tileE')
-        // this.drawEnemy()
+        var { x, y } = this.path.pop()
+        if (x == this.target.x && y == this.target.y) return
+        if (this.map.array[y][x].classList.contains('tileE')) return
+        this.killPersonage('tileE')
+        this.x = x
+        this.y = y
+        this.move2Personage(x, y, 'tileE')
+        if (this.map.array[this.y][this.x].classList.contains('tileHP')) {
+            this.map.array[this.y][this.x].classList.remove('tileHP')
+        }
+        if (this.map.array[this.y][this.x].classList.contains('tileSW')) {
+            this.map.array[this.y][this.x].classList.remove('tileSW')
+        }
+        this.drawEnemy()
     }
-
-    // checkNeighbors() {
-    //     var neigh = {}
-    //     if (this.x - 1 >= 0 && !this.checkWallBlock(this.x - 1, this.y))
-    //         neigh.left = this.x - 1
-    //     if (
-    //         this.x + 1 <= this.map.sizes.width &&
-    //         !this.checkWallBlock(this.x + 1, this.y)
-    //     )
-    //         neigh.right = this.x + 1
-    //     if (this.y - 1 >= 0 && !this.checkWallBlock(this.x, this.y - 1))
-    //         neigh.top = this.y - 1
-    //     if (
-    //         this.y + 1 <= this.map.sizes.height &&
-    //         !this.checkWallBlock(this.x, this.y + 1)
-    //     )
-    //         neigh.bottom = this.y + 1
-    //     return neigh
-    // }
-
-    // checkSmallestRange(x, y, obj) {
-    //     Object.keys(obj).map((key) => {
-    //         if (key === 'left' || key === 'right')
-    //             obj[key] = Math.abs(obj[key] - x)
-    //         if (key == 'top' || key == 'bottom')
-    //             obj[key] = Math.abs(obj[key] - y)
-    //     })
-    //     return obj
-    // }
-
-    // moveToHero(x, y) {
-    //     var minMove
-    //     var diffX = 0
-    //     var diffY = 0
-    //     var { left, right, top, bottom } = this.checkNeighbors()
-
-    //     if (
-    //         (Math.abs(left - x) != 1 && Math.abs(top - y) != 0) ||
-    //         (Math.abs(left - x) != 0 && Math.abs(top - y) != 1)
-    //     ) {
-    //         console.log('enemy: ', this.checkNeighbors(), 'and hero: ', x, y)
-    //         var ranges = this.checkSmallestRange(x, y, this.checkNeighbors())
-    //         console.log(ranges)
-    //         minMove = Math.min(...Object.values(ranges))
-    //         var position = this.checkKey(ranges, minMove)
-    //         switch (position) {
-    //             case 'top':
-    //                 this.y -= 1
-    //                 diffY = 1
-    //                 break
-    //             case 'bottom':
-    //                 this.y += 1
-    //                 diffY = -1
-    //                 break
-    //             case 'left':
-    //                 this.x -= 1
-    //                 diffX += 1
-    //                 break
-    //             case 'right':
-    //                 this.x += 1
-    //                 diffX -= 1
-    //                 break
-    //         }
-    //     }
-    //     return { diffX, diffY }
-    // }
 
     checkKey(obj, value) {
         return Object.keys(obj).find((key) => obj[key] === value)
