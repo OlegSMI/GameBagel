@@ -15,17 +15,19 @@ class Game {
         this.map.createMap()
         this.hero.createHero()
 
-        this.hero.actionsHero()
         this.hero.fighting(this.enemys)
 
-        for (var i = 0; i < 10; i++) {
-            var enemy = new Enemy(this.map.getMapSize(), this.map.MAP)
+        for (var i = 0; i < 1; i++) {
+            var enemy = new Enemy(
+                this.hero,
+                this.map.getMapSize(),
+                this.map.MAP
+            )
             enemy.fighting(this.hero)
             enemy.createEnemy()
             this.enemys.push(enemy)
             var sword = new Sword(this.map.getMapSize(), this.map.MAP)
             sword.createSword()
-            // enemy.moveEnemy()
         }
         for (var i = 0; i < 2; i++) {
             var potion = new Potion(this.map.getMapSize(), this.map.MAP)

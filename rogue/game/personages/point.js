@@ -22,7 +22,11 @@ export default class Point {
     }
 
     checkWallBlock(x, y) {
-        return this.map.array[y][x].classList.contains('tileW')
+        try {
+            return this.map.array[y][x].classList.contains('tileW')
+        } catch (e) {
+            return false
+        }
     }
 
     removePoint(y, x) {

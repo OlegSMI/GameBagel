@@ -9,6 +9,7 @@ export default class Hero extends Personage {
     createHero() {
         this.createPersonage()
         this.drawHero()
+        this.actionsHero()
     }
 
     moveHero(diffX, diffY) {
@@ -81,11 +82,9 @@ export default class Hero extends Personage {
         if (!this.map.array[enemy.y][enemy.x].classList.contains('tileE'))
             return
         enemy.reducedHealth(this.attack)
-        console.log('fill', enemy)
         if (enemy.health <= 0) {
             enemy.killPersonage('tileE')
-            enemy = null
-            console.log('bill', enemy)
+            enemy.killEnemy()
         }
     }
 
