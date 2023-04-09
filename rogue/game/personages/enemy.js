@@ -4,7 +4,7 @@ import createPathToHero from '../services/finderPath.js'
 export default class Enemy extends Personage {
     constructor(hero, ...args) {
         super(...args)
-        this.attack = 0
+        this.attack = 1
         this.target = hero
         this.path = []
     }
