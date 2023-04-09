@@ -21,7 +21,6 @@ export default class Enemy extends Personage {
 
     moveEnemy() {
         if (this.action) return
-        console.log(this.path)
         var { x, y } = this.path.pop()
         if (x == this.target.x && y == this.target.y) return
         if (this.map.array[y][x].classList.contains('tileE')) return
@@ -47,6 +46,7 @@ export default class Enemy extends Personage {
         while (!this.action) {
             await new Promise(() =>
                 setInterval(() => {
+                    if (this.action) return
                     this.path = []
                     this.path = createPathToHero(
                         this.x,

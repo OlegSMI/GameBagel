@@ -23,7 +23,6 @@ export default class Point {
 
     checkWallBlock(x, y) {
         try {
-            console.log(this.map.array[y][x])
             return this.map.array[y][x].classList.contains('tileW')
         } catch (e) {
             return false
